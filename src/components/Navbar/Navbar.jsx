@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import logo from "../../public/icon.png"
-
+import logo from "../../../public/icon.png"
+import './Navbar.css'
 const Navbar = () => {
     const location = useLocation();
 
@@ -10,8 +10,8 @@ const Navbar = () => {
             <nav className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
                 <div className="flex items-center justify-between">
                     <div className='flex items-center gap-2'>
-                        <img className='w-[40px] md:w-14' src={logo} alt="logo" />
-                        <h1 className='text-2xl md:text-4xl font-bold text-[#5B0888]'>JobHuntNest</h1>
+                        <img className='w-[40px] md:w-12' src={logo} alt="logo" />
+                        <h1 className='text-2xl md:text-4xl font-bold text-[#5B0888]'>JobHunt</h1>
                     </div>
                     <div className="sm:hidden">
                         <button type="button" className="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-[#5B0888] shadow-sm align-middle hover:bg-[#5B0888] focus:outline-none  focus:ring-offset-2 focus:ring-offset-white  transition-all text-sm border-[#5B0888]  hover:text-white " data-hs-collapse="#navbar-image-and-text-1" aria-controls="navbar-image-and-text-1" aria-label="Toggle navigation">
@@ -25,17 +25,20 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div id="navbar-image-and-text-1" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
-                    <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
+                    <div className="flex flex-col gap-3 mt-5 font-semibold sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
                         <NavLink className={location.pathname === '/' && 'text-white bg-[#5B0888] px-2 py-1 rounded-md'} to="/">Home</NavLink>
                         <NavLink className={location.pathname === '/allJobs' && 'text-white bg-[#5B0888] px-2 py-1 rounded-md'} to="/allJobs">All Jobs</NavLink>
                         <NavLink className={location.pathname === '/appliedJobs' && 'text-white bg-[#5B0888] px-2 py-1 rounded-md'} to="/appliedJobs">Applied Jobs</NavLink>
                         <NavLink className={location.pathname === '/addJob' && 'text-white bg-[#5B0888] px-2 py-1 rounded-md'} to="/addJob">Add A Job</NavLink>
                         <NavLink className={location.pathname === '/myJobs' && 'text-white bg-[#5B0888] px-2 py-1 rounded-md'} to="/myJobs">My Jobs</NavLink>
                         <NavLink className={location.pathname === '/blogs' && 'text-white bg-[#5B0888] px-2 py-1 rounded-md'} to="/blogs">Blogs</NavLink>
-                        
                     </div>
                 </div>
+                <div className="tooltip ml-3">Hover
+                    <span className="tooltiptext">name</span>
+                </div>
             </nav>
+
         </header>
     );
 };

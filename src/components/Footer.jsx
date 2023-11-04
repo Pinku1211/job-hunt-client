@@ -1,16 +1,19 @@
 import React from 'react';
-
+import logo from '../../public/icon.png'
 const Footer = () => {
     return (
-        <footer className="mt-auto w-full max-w-[85rem] bg-base-200 py-10 px-4 sm:px-6 lg:px-8 mx-auto">
+        <footer className="mt-auto w-full bg-base-200 py-10 px-4 sm:px-6 lg:px-8 mx-auto">
             <div className="text-center">
                 <div>
-                    <a className="flex-none text-xl font-semibold text-black" href="#" aria-label="Brand">JobHuntNest</a>
+                    <div className='flex justify-center mb-1'>
+                        <img className='w-[40px] md:w-14' src={logo} alt="" />
+                    </div>
+                    <a className="flex-none text-xl font-semibold text-[#5b0888]" href="#" aria-label="Brand">JobHuntNest</a>
                 </div>
-               
+
 
                 <div className="mt-3">
-                    <p className="text-gray-500">We're part of the <a className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400" href="#">CareerPioneer</a> family.</p>
+                    <p className="text-gray-500">We're part of the <a className="font-semibold text-[#5b0888] hover:text-blue-700" href="#">CareerPioneer</a> family.</p>
                     <p className="text-gray-500">© JobHuntNest. 2023 CareerPioneer. All rights reserved.</p>
                 </div>
 
@@ -36,9 +39,9 @@ const Footer = () => {
                         </svg>
                     </a>
                 </div>
-                
+
             </div>
-           
+
         </footer>
     );
 };

@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { HelmetProvider } from 'react-helmet-async';
 import Root from './Pages/Root.jsx';
 import Home from './Pages/Home/Home.jsx';
 import Error from './Pages/Error.jsx';
@@ -18,7 +19,7 @@ import Blogs from './Pages/Blogs.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root/>,
+    element: <Root />,
     errorElement: <Error />,
     children: [
       {
@@ -51,6 +52,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <HelmetProvider>
+      <RouterProvider router={router} />
+    </HelmetProvider>
   </React.StrictMode>,
 )

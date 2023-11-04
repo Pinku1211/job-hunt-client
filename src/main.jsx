@@ -10,6 +10,10 @@ import Root from './Pages/Root.jsx';
 import Home from './Pages/Home/Home.jsx';
 import Error from './Pages/Error.jsx';
 import AllJobs from './Pages/AllJobs.jsx';
+import AppliedJobs from './Pages/AppliedJobs.jsx';
+import AddJob from './Pages/AddJob.jsx';
+import MyJobs from './Pages/MyJobs.jsx';
+import Blogs from './Pages/Blogs.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +28,22 @@ const router = createBrowserRouter([
       {
         path: '/allJobs',
         element: <AllJobs></AllJobs>
+      },
+      {
+        path: '/appliedJobs',
+        element: <AppliedJobs></AppliedJobs>
+      },
+      {
+        path: '/addJob',
+        element: <AddJob></AddJob>
+      },
+      {
+        path: '/myJobs',
+        element: <MyJobs></MyJobs>
+      },
+      {
+        path: '/blogs',
+        element: <Blogs></Blogs>
       }
     ],
   },

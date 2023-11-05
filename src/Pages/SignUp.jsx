@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+import { updateProfile } from 'firebase/auth';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../components/Provider/AuthProvider';
 
 const SignUp = () => {
+    const { createUser, logInWithGoogle } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const [signUpError, setSignUpError] = useState('');
+    const navigate = useNavigate();
 
 
 
@@ -32,7 +37,36 @@ const SignUp = () => {
             setSignUpError('Please accept our terms and conditions to proceed')
             return;
         }
+
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user)
+                updateProfile(result.user, {
+                    displayName: name,
+                    photoURL: photo
+                })
+                new Swal("JobHunt", "Account created successfully!");
+                navigate(location?.state ? location.state : "/")
+                
+            })
+            .catch(error => {
+                console.log(error)
+                setSignUpError(error.message)
+            })
     }
+
+    const handleGoogleSignIng = () => {
+        logInWithGoogle()
+            .then(result => {
+                console.log(result.user)
+                new Swal("JobHunt", "Logged in successfully!");
+                navigate(location?.state ? location.state : "/")
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     return (
         <div className="relative overflow-hidden">
             <Helmet><title>JobHunt | SignUp</title></Helmet>
@@ -40,10 +74,10 @@ const SignUp = () => {
                 <div className="md:pr-8 md:w-1/2 xl:pr-0 xl:w-5/12">
 
                     <h1 className="text-3xl text-center text-[#5b0888] font-bold md:text-4xl md:leading-tight lg:text-5xl lg:leading-tight">
-                        SignUp Now To Start
+                        SignUp Now To Explore
                     </h1>
                     <div className="mt-8 grid">
-                        <button type="button" className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-[#5b0888] font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-[#5b0888] hover:text-white transition-all text-sm sm:p-4">
+                        <button onClick={handleGoogleSignIng} type="button" className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-[#5b0888] font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-[#5b0888] hover:text-white transition-all text-sm sm:p-4">
                             <svg className="w-4 h-auto" width="46" height="47" viewBox="0 0 46 47" fill="none">
                                 <path d="M46 24.0287C46 22.09 45.8533 20.68 45.5013 19.2112H23.4694V27.9356H36.4069C36.1429 30.1094 34.7347 33.37 31.5957 35.5731L31.5663 35.8669L38.5191 41.2719L38.9885 41.3306C43.4477 37.2181 46 31.1669 46 24.0287Z" fill="#4285F4" />
                                 <path d="M23.4694 47C29.8061 47 35.1161 44.9144 39.0179 41.3012L31.625 35.5437C29.6301 36.9244 26.9898 37.8937 23.4987 37.8937C17.2793 37.8937 12.0281 33.7812 10.1505 28.1412L9.88649 28.1706L2.61097 33.7812L2.52296 34.0456C6.36608 41.7125 14.287 47 23.4694 47Z" fill="#34A853" />

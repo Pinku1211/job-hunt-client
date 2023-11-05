@@ -17,6 +17,7 @@ import MyJobs from './Pages/MyJobs.jsx';
 import Blogs from './Pages/Blogs.jsx';
 import Login from './Pages/Login.jsx';
 import SignUp from './Pages/SignUp.jsx';
+import AuthProvider from './components/Provider/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -62,8 +63,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <HelmetProvider>
-      <RouterProvider router={router} />
-    </HelmetProvider>
+    <AuthProvider>
+      <HelmetProvider>
+        <RouterProvider router={router} />
+      </HelmetProvider>
+    </AuthProvider>
   </React.StrictMode>,
 )

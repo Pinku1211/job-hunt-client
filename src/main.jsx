@@ -15,6 +15,8 @@ import AppliedJobs from './Pages/AppliedJobs.jsx';
 import AddJob from './Pages/AddJob.jsx';
 import MyJobs from './Pages/MyJobs.jsx';
 import Blogs from './Pages/Blogs.jsx';
+import Login from './Pages/Login.jsx';
+import SignUp from './Pages/SignUp.jsx';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: '/blogs',
         element: <Blogs></Blogs>
+      },
+      {
+        path: '/login',
+        element: <Login></Login>
+      },
+      {
+        path: '/signUp',
+        element: <SignUp></SignUp>
       }
     ],
   },

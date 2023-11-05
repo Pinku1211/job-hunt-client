@@ -5,7 +5,7 @@ const AppliedJobs = () => {
     return (
         <div>
             <Helmet>
-                <title>JobHuntNest | Applied Jobs</title>
+                <title>JobHunt | Applied Jobs</title>
             </Helmet>
             <h1>Applied Jobs</h1>
         </div>

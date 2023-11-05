@@ -5,7 +5,7 @@ const Blogs = () => {
     return (
         <div>
             <Helmet>
-                <title>JobHuntNest | Blogs</title>
+                <title>JobHunt | Blogs</title>
             </Helmet>
             <h1>Blogs</h1>
         </div>

@@ -1,0 +1,98 @@
+[
+    {
+      "job_category": "On Site Job",
+      "name_posted": "John Doe",
+      "job_title": "Software Engineer",
+      "job_posting_date": "2023-11-01",
+      "application_deadline": "2023-11-15",
+      "salary_range": "$80,000 - $100,000",
+      "applicants_number": 50,
+      "company_logo": "company1_logo.png",
+      "job_banner": "https://i.ibb.co/7pB1ShM/1.jpg",
+      "description": "We are seeking a talented Software Engineer to join our team."
+    },
+    {
+      "job_category": "On Site Job",
+      "name_posted": "Jane Smith",
+      "job_title": "Data Analyst",
+      "job_posting_date": "2023-11-05",
+      "application_deadline": "2023-11-20",
+      "salary_range": "$60,000 - $80,000",
+      "applicants_number": 40,
+      "company_logo": "company1_logo.png",
+      "job_banner": "https://i.ibb.co/7pB1ShM/1.jpghttps://i.ibb.co/kMTqy8w/2.jpg",
+      "description": "We are looking for a Data Analyst to analyze and interpret data."
+    },
+    {
+      "job_category": "Remote Job",
+      "name_posted": "Mike Johnson",
+      "job_title": "Marketing Manager",
+      "job_posting_date": "2023-10-25",
+      "application_deadline": "2023-11-10",
+      "salary_range": "$90,000 - $120,000",
+      "applicants_number": 35,
+      "company_logo": "company2_logo.png",
+      "job_banner": "https://i.ibb.co/mJghfrb/market.png",
+      "description": "Join our team as a Marketing Manager and drive our marketing efforts."
+    },
+    {
+      "job_category": "Remote Job",
+      "name_posted": "Sara Brown",
+      "job_title": "Graphic Designer",
+      "job_posting_date": "2023-11-02",
+      "application_deadline": "2023-11-17",
+      "salary_range": "$45,000 - $60,000",
+      "applicants_number": 60,
+      "company_logo": "company2_logo.png",
+      "job_banner": "https://i.ibb.co/7pB1ShM/1.jpghttps://i.ibb.co/kMTqy8w/2.jpghttps://i.ibb.co/GM7mGCy/gp.jpg",
+      "description": "We need a talented Graphic Designer to create stunning visuals."
+    },
+    {
+      "job_category": "Hybrid",
+      "name_posted": "Mark Wilson",
+      "job_title": "Project Manager",
+      "job_posting_date": "2023-10-28",
+      "application_deadline": "2023-11-12",
+      "salary_range": "$100,000 - $120,000",
+      "applicants_number": 25,
+      "company_logo": "company3_logo.png",
+      "job_banner": "https://i.ibb.co/bFvhCX3/6.webp",
+      "description": "We're hiring a Project Manager to lead and deliver projects."
+    },
+    {
+      "job_category": "Hybrid",
+      "name_posted": "Emily Clark",
+      "job_title": "Sales Representative",
+      "job_posting_date": "2023-11-03",
+      "application_deadline": "2023-11-18",
+      "salary_range": "$50,000 - $70,000",
+      "applicants_number": 45,
+      "company_logo": "company3_logo.png",
+      "job_banner": "https://i.ibb.co/sH2rvsJ/7.webp",
+      "description": "Join our sales team and drive revenue growth as a Sales Representative."
+    },
+    {
+      "job_category": "Part Time",
+      "name_posted": "Alex Turner",
+      "job_title": "Customer Support Specialist",
+      "job_posting_date": "2023-10-30",
+      "application_deadline": "2023-11-14",
+      "salary_range": "$40,000 - $50,000",
+      "applicants_number": 30,
+      "company_logo": "company4_logo.png",
+      "job_banner": "https://i.ibb.co/RCp2Q3n/8.png",
+      "description": "We are seeking a Customer Support Specialist to assist our clients."
+    },
+    {
+      "job_category": "Part Time",
+      "name_posted": "Olivia White",
+      "job_title": "HR Coordinator",
+      "job_posting_date": "2023-11-04",
+      "application_deadline": "2023-11-19",
+      "salary_range": "$55,000 - $70,000",
+      "applicants_number": 20,
+      "company_logo": "company4_logo.png",
+      "job_banner": "https://i.ibb.co/pQj7Y7b/9.jpg",
+      "description": "Join our HR team as an HR Coordinator and manage human resources tasks."
+    }
+  ]

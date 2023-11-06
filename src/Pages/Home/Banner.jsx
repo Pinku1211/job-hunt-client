@@ -4,7 +4,7 @@ import { FaSistrix } from "react-icons/fa";
 const Banner = () => {
     return (
 
-        <div class="overflow-hidden">
+        <div class="overflow-hidden py-20">
             <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-20">
                 <div class="relative mx-auto max-w-4xl grid space-y-5 sm:space-y-10">
 

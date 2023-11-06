@@ -19,6 +19,8 @@ import Blogs from './Pages/Blogs.jsx';
 import Login from './Pages/Login.jsx';
 import SignUp from './Pages/SignUp.jsx';
 import AuthProvider from './components/Provider/AuthProvider.jsx';
+import Details from './Pages/Details.jsx';
+import Private from './components/Private/Private.jsx';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: '/signUp',
         element: <SignUp></SignUp>
+      },
+      {
+        path: '/details',
+        element: <Private><Details></Details></Private>
       }
     ],
   },

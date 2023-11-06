@@ -16,9 +16,9 @@ const TabJobs = () => {
     console.log(jobs)
 
     const onSite = jobs?.filter(job => job.job_category === "On Site Job");
-    const remote = jobs.filter(job => job.job_category === "Remote Job")
-    const hybrid = jobs.filter(job => job.job_category === "Hybrid")
-    const partTime = jobs.filter(job => job.job_category === "Part Time")
+    const remote = jobs?.filter(job => job.job_category === "Remote Job")
+    const hybrid = jobs?.filter(job => job.job_category === "Hybrid")
+    const partTime = jobs?.filter(job => job.job_category === "Part Time")
 
 
 

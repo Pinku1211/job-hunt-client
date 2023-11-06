@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AllJobs = ({ job }) => {
 
@@ -15,7 +16,7 @@ const AllJobs = ({ job }) => {
                     <p className='text-black'>Application Deadline: {application_deadline}</p>
                     <p className='text-black'>Salary Range: {salary_range}</p>
                     <p className='text-black'>Job Applicants Number: {applicants_number}</p>
-                    <button className='mx-2 border border-[#5b0888] rounded-md px-2 py-[2px] sm:block text-[#5b0888] hover:bg-[#5b0888] hover:text-white'>View Details</button>
+                    <Link to='/details'><button className='mx-2 border border-[#5b0888] rounded-md px-2 py-[2px] sm:block text-[#5b0888] hover:bg-[#5b0888] hover:text-white'>View Details</button></Link>
                 </div>
             </div>
         </div>

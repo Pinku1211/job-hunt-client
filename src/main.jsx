@@ -11,7 +11,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import Root from './Pages/Root.jsx';
 import Home from './Pages/Home/Home.jsx';
 import Error from './Pages/Error.jsx';
-import AllJobs from './Pages/AllJobs.jsx';
+import AllJobs from './Pages/AllJobs/AllJobs.jsx';
 import AppliedJobs from './Pages/AppliedJobs.jsx';
 import AddJob from './Pages/AddJob.jsx';
 import MyJobs from './Pages/MyJobs.jsx';
@@ -34,7 +34,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/allJobs',
-        element: <AllJobs></AllJobs>
+        element: <AllJobs></AllJobs>,
+        loader: () => fetch('http://localhost:5000/jobs')
       },
       {
         path: '/appliedJobs',
@@ -77,4 +78,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </HelmetProvider>
     </AuthProvider>
   </React.StrictMode>,
-)
+);

@@ -21,6 +21,7 @@ import SignUp from './Pages/SignUp.jsx';
 import AuthProvider from './components/Provider/AuthProvider.jsx';
 import Details from './Pages/Details.jsx';
 import Private from './components/Private/Private.jsx';
+import AllDetails from './Pages/AllJobs/AllDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,11 @@ const router = createBrowserRouter([
       {
         path: '/details/:id',
         element: <Private><Details></Details></Private>,
+        loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
+      },
+      {
+        path: '/allDetails/:id',
+        element: <Private><AllDetails></AllDetails></Private>,
         loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
       }
     ],

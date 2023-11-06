@@ -22,7 +22,7 @@ const JobRow = ({ job }) => {
                     <td>{application_deadline}</td>
                     <td>{salary_range}</td>
                     <th>
-                        <Link to={`allDetails/${_id}`}><button className="mx-2 border bg-[#5b0888] text-white hover:bg-[#380b50] p-2 sm:block rounded-md hover:text-white">details</button></Link>
+                        <Link to={`/allDetails/${_id}`}><button className="mx-2 border bg-[#5b0888] text-white hover:bg-[#380b50] p-2 sm:block rounded-md hover:text-white">details</button></Link>
                     </th>
                 </tr>
             </tbody>

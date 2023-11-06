@@ -11,20 +11,20 @@ const Banner = () => {
                     <div class="text-center">
                         
                         <h1 class="text-3xl text-gray-800 font-bold sm:text-5xl lg:text-6xl lg:leading-tight">
-                        Experience the new way to work <span class="text-[#5b0888]">Verified By Us</span>
+                        Experience the new way to work, <span class="text-[#5b0888]">Verified By Us</span>
                         </h1>
                         <p className='mt-4 text-[#5b0888] font-bold'>See jobs we've picked just for you</p>
                     </div>
 
                     <form>
-                        <div class="mx-auto max-w-2xl sm:flex sm:space-x-3 p-2 bg-white border rounded-lg shadow-lg shadow-gray-100 ">
+                        <div class="mx-auto max-w-2xl sm:flex sm:space-x-3 p-2 bg-white border rounded-lg md:rounded-full shadow-lg shadow-gray-100 ">
                             <div class="pb-2 sm:pb-0 sm:flex-[1_0_0%]">
                                 <label for="hs-hero-name-1" class="block text-sm font-medium"><span class="sr-only">Your name</span></label>
                                 <input type="text" id="hs-hero-name-1" class="py-3 px-4 block w-full border-transparent rounded-full text-sm focus:border-blue-500 focus:ring-blue-500 sm:p-4 " placeholder="Job title" />
                             </div>
                             <div class="pt-2 sm:pt-0 sm:pl-3 border-t border-gray-200 sm:border-t-0 sm:border-l sm:flex-[1_0_0%] dark:border-gray-700">
                                 <label for="hs-hero-email-1" class="block text-sm font-medium"><span class="sr-only">Your email address</span></label>
-                                <input type="email" id="hs-hero-email-1" class="py-3 px-4 block w-full border-transparent rounded-full text-sm focus:border-blue-500 focus:ring-blue-500 sm:p-4 " placeholder="Your city" />
+                                <input type="text" id="hs-hero-email-1" class="py-3 px-4 block w-full border-transparent rounded-full text-sm focus:border-blue-500 focus:ring-blue-500 sm:p-4 " placeholder="Your city" />
                             </div>
                             <div class="pt-2 sm:pt-0 grid ">
                                 <a class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-full border border-transparent font-semibold bg-[#5b0888] text-white hover:bg-[#380b50] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm sm:p-4" href="#">

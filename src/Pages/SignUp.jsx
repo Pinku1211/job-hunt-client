@@ -23,7 +23,6 @@ const SignUp = () => {
         const password = form.get('password')
         const checkBox = e.target.checkBox.checked;
         setSignUpError('');
-        console.log(name, photo, email, password, checkBox)
 
         if(password.length < 6) {
             setSignUpError('Password should be at least six character')

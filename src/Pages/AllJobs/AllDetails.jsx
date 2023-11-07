@@ -1,10 +1,40 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useContext } from 'react';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../components/Provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const AllDetails = () => {
+    const { user } = useContext(AuthContext)
+    const navigate = useNavigate();
     const job = useLoaderData();
     const { job_category, _id, job_title, name_posted, salary_range, job_posting_date, applicants_number, application_deadline, job_banner, description } = job;
-    console.log(job)
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const name = form.get('name')
+        const resume = form.get('resume')
+        const email = form.get('email')
+
+        const currentDate = new Date();
+        console.log(currentDate)
+
+        if (currentDate < application_deadline) {
+            new Swal("JobHunt", "Application Submitted successfully!");
+            navigate(location?.state ? location.state : "/allJobs")
+        }
+        console.log(name, resume, email)
+        Swal.fire({
+            title: 'Sorry!',
+            text: 'Application Deadline is over',
+            icon: 'error',
+            confirmButtonText: 'Cool'
+          })
+        navigate(location?.state ? location.state : "/allDetails/:id")
+    }
+
+
     return (
         <div>
             <div className='max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto'>
@@ -17,6 +47,43 @@ const AllDetails = () => {
                 <p className='text-black'>Salary Range: {salary_range}</p>
                 <p className='text-black'>Job Applicants Number: {applicants_number}</p>
                 <p className='text-black'>Job Description: {description}</p>
+                <div className='flex justify-center mt-6'>
+                    {/* <button className="border bg-[#5b0888] text-white hover:bg-[#380b50] py-2 px-5 sm:block rounded-md hover:text-white">Apply</button> */}
+                    {/* Open the modal using document.getElementById('ID').showModal() method */}
+                    <button className="border bg-[#5b0888] text-white hover:bg-[#380b50] py-2 px-5 sm:block rounded-md hover:text-white" onClick={() => document.getElementById('my_modal_5').showModal()}>Apply</button>
+                    <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                        <div className="modal-box">
+                            <form onSubmit={handleSubmit}>
+                                <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                                    <div>
+                                        <label className="text-gray-700 dark:text-gray-200" for="username">Username</label>
+                                        <input name='name' id="username" type="text" defaultValue={user.displayName} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                    </div>
+
+                                    <div>
+                                        <label className="text-gray-700 dark:text-gray-200" for="emailAddress">Email Address</label>
+                                        <input name='email' id="emailAddress" type="email" defaultValue={user.email} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                    </div>
+
+                                    <div>
+                                        <label className="text-gray-700 dark:text-gray-200" for="password">Your Resume</label>
+                                        <input name='resume' id="resume" type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-end mt-6">
+                                    <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Submit</button>
+                                </div>
+                            </form>
+                            <div className="modal-action">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+                </div>
             </div>
         </div>
     );

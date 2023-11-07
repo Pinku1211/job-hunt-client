@@ -53,7 +53,7 @@ const MyJobs = () => {
     }
 
     return (
-        <div className='h-[60vh]'>
+        <div className='min-h-[80vh]'>
             <Helmet>
                 <title>JobHunt | My Jobs</title>
             </Helmet>

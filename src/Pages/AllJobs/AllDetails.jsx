@@ -10,6 +10,8 @@ const AllDetails = () => {
     const job = useLoaderData();
     const { job_category, _id, job_title, name_posted, salary_range, job_posting_date, applicants_number, application_deadline, job_banner, description } = job;
 
+    const jobId = _id
+
     const handleSubmit = e => {
         e.preventDefault();
         const form = e.target;
@@ -19,7 +21,7 @@ const AllDetails = () => {
         const currentDate = new Date();
         console.log(currentDate)
 
-        const applicant = { name, email, resume }
+        const applicant = { name, email, resume, jobId }
 
         console.log(applicant)
 

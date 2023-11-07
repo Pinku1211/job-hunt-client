@@ -29,7 +29,7 @@ const AllJobs = () => {
             </Helmet>
             <p className='my-8 text-[#5b0888] text-3xl text-center font-bold'>See jobs we've picked just for you</p>
             <form onSubmit={handleSearch} className='mb-8'>
-                <div class="mx-auto max-w-2xl sm:flex sm:space-x-3 p-2 bg-white border rounded-full shadow-lg shadow-gray-100 ">
+                <div class="mx-auto max-w-2xl sm:flex sm:space-x-3 p-2 bg-white border rounded-lg md:rounded-full lg:rounded-full shadow-lg shadow-gray-100 ">
                     <div class="pb-2 sm:pb-0 sm:flex-[1_0_0%]">
                         <label for="hs-hero-name-1" class="block text-sm font-medium"><span class="sr-only">Your name</span></label>
                         <input name='job' type="text" id="hs-hero-name-1" class="py-3 px-4 block w-full border-transparent rounded-full text-sm focus:border-blue-500 focus:ring-blue-500 sm:p-4 " placeholder="Job title" />

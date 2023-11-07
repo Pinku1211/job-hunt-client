@@ -91,7 +91,7 @@ const AddJob = () => {
                     </div>
 
                     <div className="flex mx-auto mt-6">
-                        <input type="submit" value="Add Product" className='w-full outline-white p-2 rounded-lg hover:bg-[#5b0888] hover:text-white border border-[#5b0888] text-[#5b0888]' />
+                        <input type="submit" value="Add Job" className='w-full outline-white p-2 rounded-lg hover:bg-[#5b0888] hover:text-white border border-[#5b0888] text-[#5b0888]' />
                     </div>
                 </form>
             </section>

@@ -12,7 +12,7 @@ import Root from './Pages/Root.jsx';
 import Home from './Pages/Home/Home.jsx';
 import Error from './Pages/Error.jsx';
 import AllJobs from './Pages/AllJobs/AllJobs.jsx';
-import AppliedJobs from './Pages/AppliedJobs.jsx';
+import AppliedJobs from './Pages/AppliedJobs/AppliedJobs.jsx';
 import AddJob from './Pages/AddJob.jsx';
 import MyJobs from './Pages/MyJobs/MyJobs.jsx';
 import Blogs from './Pages/Blogs.jsx';
@@ -41,15 +41,16 @@ const router = createBrowserRouter([
       },
       {
         path: '/appliedJobs',
-        element: <AppliedJobs></AppliedJobs>
+        element: <Private><AppliedJobs></AppliedJobs></Private>,
+        loader: () => fetch('http://localhost:5000/jobs')
       },
       {
         path: '/addJob',
-        element: <AddJob></AddJob>
+        element: <Private><AddJob></AddJob></Private>,
       },
       {
         path: '/myJobs',
-        element: <MyJobs></MyJobs>,
+        element: <Private><MyJobs></MyJobs></Private>,
         loader: () => fetch('http://localhost:5000/jobs')
       },
       {

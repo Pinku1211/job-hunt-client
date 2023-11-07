@@ -1,7 +1,13 @@
 import React from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-const MyJob = ({job}) => {
-    const { job_category, _id, job_title, name_posted, salary_range, job_posting_date, applicants_number, application_deadline } = job;
+const MyJob = ({job, handleDelete}) => {
+    const { job_category, _id, job_title } = job;
+
+    
+
     return (
         <div>
             <tbody>
@@ -12,10 +18,10 @@ const MyJob = ({job}) => {
                     <td>{job_category}</td>
                     
                     <th>
-                        <button className="mx-2 border bg-[#5b0888] text-white hover:bg-[#380b50] p-2 sm:block rounded-md hover:text-white">Update</button>
+                        <Link to='/update'><button className="mx-2 border bg-[#5b0888] text-white hover:bg-[#380b50] p-2 sm:block rounded-md hover:text-white">Update</button></Link>
                     </th>
                     <th>
-                        <button className="mx-2 border bg-[#5b0888] text-white hover:bg-[#380b50] p-2 sm:block rounded-md hover:text-white">Delete</button>
+                        <button onClick={() => handleDelete(_id)} className="mx-2 border bg-[#5b0888] text-white hover:bg-[#380b50] p-2 sm:block rounded-md hover:text-white">Delete</button>
                     </th>
                 </tr>
             </tbody>

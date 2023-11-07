@@ -22,6 +22,7 @@ import AuthProvider from './components/Provider/AuthProvider.jsx';
 import Details from './Pages/Details.jsx';
 import Private from './components/Private/Private.jsx';
 import AllDetails from './Pages/AllJobs/AllDetails.jsx';
+import Update from './Pages/MyJobs/Update.jsx';
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,11 @@ const router = createBrowserRouter([
       {
         path: '/allDetails/:id',
         element: <Private><AllDetails></AllDetails></Private>,
+        loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
+      },
+      {
+        path: '/update/:id',
+        element: <Private><Update></Update></Private>,
         loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
       }
     ],

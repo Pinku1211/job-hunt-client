@@ -9,14 +9,15 @@ import { AuthContext } from '../../components/Provider/AuthProvider';
 
 const MyJobs = () => {
 
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const loadedJobs = useLoaderData();
     const [jobs, setJobs] = useState(loadedJobs);
     console.log(jobs)
+    console.log(user.displayName)
 
-    const myJobs = jobs.filter(job => job.name_posted === `${user.displayName}`)
+    const myJobs = jobs?.filter(job => job.name_posted === `${user.displayName}`)
 
-    const handleDelete = id =>{
+    const handleDelete = id => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -25,30 +26,30 @@ const MyJobs = () => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 console.log(id)
 
-                fetch(`http://localhost:5000/jobs/${id}`,{
+                fetch(`http://localhost:5000/jobs/${id}`, {
                     method: "DELETE"
                 })
-                .then(res => res.json())
-                .then(data => {
-                    if(data.deletedCount > 0) {
-                        Swal.fire(
-                            'Deleted!',
-                            'Your product has been deleted.',
-                            'success'
-                          )
-                          const remaining = jobs.filter(job => job._id !== id);
-                          setJobs(remaining)
-                          console.log(remaining)
-                    }
-                    
-                })
-              
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your Job has been deleted.',
+                                'success'
+                            )
+                            const remaining = jobs?.filter(job => job._id !== id);
+                            setJobs(remaining)
+                            console.log(remaining)
+                        }
+
+                    })
+
             }
-          })
+        })
     }
 
     return (
@@ -60,17 +61,20 @@ const MyJobs = () => {
                 <table className="table">
                     {/* head */}
                     <thead>
-                        <tr className='flex justify-start gap-20'>
-                            <th>Job Title</th>
-                            <th>Category</th>                            
+                        <tr className=''>
+                            <th>Name</th>
+                            <th>Job</th>
+                            <th>Posting Date</th>
+                            <th>Deadline</th>
+                            <th>Salary range</th>
                         </tr>
                     </thead>
                     {
-                        myJobs.length === 0 ? <div><h1 className='text-center text-red-400 text-xl font-bold my-3'>There is no Product of yours</h1></div> : myJobs?.map(job => <MyJob key={job._id} job={job} handleDelete={handleDelete}></MyJob>) 
-                    
+                        myJobs.length === 0 ? <div><h1 className='text-center text-red-400 text-xl font-bold my-3'>There is no Product of yours</h1></div> : myJobs?.map(job => <MyJob key={job._id} job={job} handleDelete={handleDelete}></MyJob>)
+
 
                     }
-                    
+
                 </table>
             </div>
         </div>

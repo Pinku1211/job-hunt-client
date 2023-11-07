@@ -12,26 +12,38 @@ const AllDetails = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const form = new FormData(e.currentTarget);
-        const name = form.get('name')
-        const resume = form.get('resume')
-        const email = form.get('email')
-
+        const form = e.target;
+        const name = form.name.value
+        const resume = form.resume.value
+        const email = form.email.value
         const currentDate = new Date();
         console.log(currentDate)
 
-        if (currentDate < application_deadline) {
-            new Swal("JobHunt", "Application Submitted successfully!");
-            navigate(location?.state ? location.state : "/allJobs")
-        }
-        console.log(name, resume, email)
-        Swal.fire({
-            title: 'Sorry!',
-            text: 'Application Deadline is over',
-            icon: 'error',
-            confirmButtonText: 'Cool'
-          })
-        navigate(location?.state ? location.state : "/allDetails/:id")
+        const applicant = { name, email, resume }
+
+        console.log(applicant)
+
+        fetch('http://localhost:5000/applicants', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(applicant)
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                console.log(data.insertedId)
+            })
+        new Swal("JobHunt", "Application Submitted successfully!");
+        navigate(location?.state ? location.state : "/allJobs")
+
+
+
+        // new Swal("JobHunt", "Application Deadline is Over!");
+        // navigate(location?.state ? location.state : "/allJobs")
+
+
     }
 
 

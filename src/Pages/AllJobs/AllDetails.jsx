@@ -3,48 +3,67 @@ import { useContext } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../components/Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import emailjs from '@emailjs/browser';
+import { useRef } from 'react';
 
 const AllDetails = () => {
+    const formRef = useRef()
     const { user } = useContext(AuthContext)
     const navigate = useNavigate();
     const job = useLoaderData();
     const { job_category, _id, job_title, name_posted, salary_range, job_posting_date, applicants_number, application_deadline, job_banner, description } = job;
 
     const jobId = _id
+    console.log(applicants_number)
+    // fetch(`http://localhost:5000/jobs/${_id}`, {
+    //     method: 'PUT',
+    //     headers: {
+    //         'content-type': 'application/json'
+    //     },
+    //     body: JSON.stringify()
+    // })
+
 
     const handleSubmit = e => {
         e.preventDefault();
         const form = e.target;
-        const name = form.name.value
+        const name = form.from_name.value
         const resume = form.resume.value
-        const email = form.email.value
-        const currentDate = new Date();
-        console.log(currentDate)
-
+        const email = form.from_email.value
         const applicant = { name, email, resume, jobId }
 
-        console.log(applicant)
+        const currentDate = new Date();
+        const today = currentDate.getTime();
+        const deadline = new Date(application_deadline).getTime();
 
-        fetch('http://localhost:5000/applicants', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(applicant)
-        })
-            .then(res => res.json())
-            .then(data => {
-
-                console.log(data.insertedId)
+        if (deadline > today) {
+            fetch('http://localhost:5000/applicants', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(applicant)
             })
-        new Swal("JobHunt", "Application Submitted successfully!");
-        navigate(location?.state ? location.state : "/allJobs")
+                .then(res => res.json())
+                .then(data => {
 
+                    console.log(data.insertedId)
+                    if (data.insertedId) {
+                        new Swal("JobHunt", "Application Submitted successfully!");
+                        navigate(location?.state ? location.state : "/allJobs")
+                        emailjs.sendForm('service_jrlazz4', 'template_xgjnozk', formRef.current, '9p1CIaofBsrpwmiZi')
+                            .then((result) => {
+                                console.log(result.text);
+                            }, (error) => {
+                                console.log(error.text);
+                            });
+                    }
+                })
 
-
-        // new Swal("JobHunt", "Application Deadline is Over!");
-        // navigate(location?.state ? location.state : "/allJobs")
-
+        } else {
+            new Swal("JobHunt", "Application Deadline is over!");
+            navigate(location?.state ? location.state : "/allJobs")
+        }
 
     }
 
@@ -62,21 +81,20 @@ const AllDetails = () => {
                 <p className='text-black'>Job Applicants Number: {applicants_number}</p>
                 <p className='text-black'>Job Description: {description}</p>
                 <div className='flex justify-center mt-6'>
-                    {/* <button className="border bg-[#5b0888] text-white hover:bg-[#380b50] py-2 px-5 sm:block rounded-md hover:text-white">Apply</button> */}
                     {/* Open the modal using document.getElementById('ID').showModal() method */}
                     <button className="border bg-[#5b0888] text-white hover:bg-[#380b50] py-2 px-5 sm:block rounded-md hover:text-white" onClick={() => document.getElementById('my_modal_5').showModal()}>Apply</button>
                     <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                         <div className="modal-box">
-                            <form onSubmit={handleSubmit}>
+                            <form ref={formRef} onSubmit={handleSubmit}>
                                 <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                     <div>
                                         <label className="text-gray-700 dark:text-gray-200" for="username">Username</label>
-                                        <input name='name' id="username" type="text" defaultValue={user.displayName} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                        <input name='from_name' id="username" type="text" defaultValue={user.displayName} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
                                     </div>
 
                                     <div>
                                         <label className="text-gray-700 dark:text-gray-200" for="emailAddress">Email Address</label>
-                                        <input name='email' id="emailAddress" type="email" defaultValue={user.email} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                        <input name='from_email' id="emailAddress" type="email" defaultValue={user.email} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
                                     </div>
 
                                     <div>

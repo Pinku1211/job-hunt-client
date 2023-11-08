@@ -10,8 +10,9 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 
 const AppliedJobs = () => {
+    const {user} = useContext(AuthContext)
     const [jobs, setJobs] = useState([]);
-    const applicants = useLoaderData();
+    const [applicants, setApplicants] = useState([]);
     const [selectedJobs, setSelectedJobs] = useState([]);
 
     useEffect(() => {
@@ -19,6 +20,14 @@ const AppliedJobs = () => {
             .then(res => res.json())
             .then(data => setJobs(data))
     }, [])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/applicants?email=${user.email}`,
+        {credentials: 'include'}
+        )
+        .then(res => res.json())
+        .then(data => setApplicants(data))
+    },[])
 
 
     const appliedJobs = [];
@@ -50,15 +59,13 @@ const AppliedJobs = () => {
 
     }
 
-    console.log(selectedJobs)
-
     return (
         <div className='min-h[100vh]'>
             <Helmet>
                 <title>JobHunt | Applied Jobs</title>
             </Helmet>
             <p className='my-8 text-[#5b0888] text-2xl text-center font-bold'>Search the Jobs You Applied</p>
-            <div className='flex justify-center'>
+            <div className='flex justify-center min-h-[10vh]'>
                 <select onChange={handleSearch} className="select select-secondary w-full max-w-xs">
                     <option disabled selected>Pick your favorite job</option>
                     <option>On Site Job</option>

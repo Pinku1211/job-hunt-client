@@ -8,7 +8,7 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -24,7 +24,7 @@ const AuthProvider = ({children}) => {
 
     const logOut = () => {
         setLoading(true)
-       return signOut(auth)
+        return signOut(auth)
     }
 
     const login = (email, password) => {
@@ -34,16 +34,48 @@ const AuthProvider = ({children}) => {
     }
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            const userEmail = currentUser?.email || user?.email;
+            const loggedUser = { email: userEmail };
             setUser(currentUser)
             setLoading(false)
+            console.log(currentUser)
+            if (currentUser) {
+                
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(loggedUser),
+                    credentials: 'include'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("token response",data)
+                    })
+            }
+            else{
+                fetch('http://localhost:5000/logout', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(loggedUser),
+                    credentials: 'include'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                    })
+            }
         })
         return () => {
             unsubscribe();
         }
 
-    },[])
- 
+    }, [])
+
 
     const authInfo = {
         user,

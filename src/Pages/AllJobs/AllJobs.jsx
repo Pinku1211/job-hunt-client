@@ -14,7 +14,7 @@ const AllJobs = () => {
         const form = new FormData(e.currentTarget);
         const jobTitle = form.get('job').toLowerCase();
         
-        const searchedJobs = defaultJobs.filter(defaultJob => defaultJob.job_title.toLowerCase() == jobTitle);
+        const searchedJobs = defaultJobs?.filter(defaultJob => defaultJob.job_title.toLowerCase() == jobTitle);
         setDefaultJob(searchedJobs)
         console.log(searchedJobs)
         

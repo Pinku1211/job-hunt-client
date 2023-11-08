@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
             console.log(currentUser)
             if (currentUser) {
                 
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://job-hunt-final-server.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
                     })
             }
             else{
-                fetch('http://localhost:5000/logout', {
+                fetch('https://job-hunt-final-server.vercel.app/logout', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

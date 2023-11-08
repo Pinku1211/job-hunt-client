@@ -37,12 +37,12 @@ const router = createBrowserRouter([
       {
         path: '/allJobs',
         element: <AllJobs></AllJobs>,
-        loader: () => fetch('http://localhost:5000/jobs')
+        loader: () => fetch('https://job-hunt-final-server.vercel.app/jobs')
       },
       {
         path: '/appliedJobs',
         element: <Private><AppliedJobs></AppliedJobs></Private>,
-        // loader: () => fetch('http://localhost:5000/applicants'),
+        // loader: () => fetch('https://job-hunt-final-server.vercel.app/applicants'),
       
       },
       {
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       {
         path: '/myJobs',
         element: <Private><MyJobs></MyJobs></Private>,
-        loader: () => fetch('http://localhost:5000/jobs')
+        loader: () => fetch('https://job-hunt-final-server.vercel.app/jobs')
       },
       {
         path: '/blogs',
@@ -69,17 +69,17 @@ const router = createBrowserRouter([
       {
         path: '/details/:id',
         element: <Private><Details></Details></Private>,
-        loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
+        loader: ({params}) => fetch(`https://job-hunt-final-server.vercel.app/jobs/${params.id}`)
       },
       {
         path: '/allDetails/:id',
         element: <Private><AllDetails></AllDetails></Private>,
-        loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
+        loader: ({params}) => fetch(`https://job-hunt-final-server.vercel.app/jobs/${params.id}`)
       },
       {
         path: '/update/:id',
         element: <Private><Update></Update></Private>,
-        loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
+        loader: ({params}) => fetch(`https://job-hunt-final-server.vercel.app/jobs/${params.id}`)
       }
     ],
   },

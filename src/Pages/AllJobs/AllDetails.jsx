@@ -27,7 +27,7 @@ const AllDetails = () => {
         const deadline = new Date(application_deadline).getTime();
 
         if (deadline > today) {
-            fetch('http://localhost:5000/applicants', {
+            fetch('https://job-hunt-final-server.vercel.app/applicants', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -50,7 +50,7 @@ const AllDetails = () => {
                     }
                 })
 
-            fetch(`http://localhost:5000/applicants/${jobId}`, {
+            fetch(`https://job-hunt-final-server.vercel.app/applicants/${jobId}`, {
                 method: 'PUT',
             })
             .then(res => res.json())

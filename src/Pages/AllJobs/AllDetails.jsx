@@ -12,17 +12,7 @@ const AllDetails = () => {
     const navigate = useNavigate();
     const job = useLoaderData();
     const { job_category, _id, job_title, name_posted, salary_range, job_posting_date, applicants_number, application_deadline, job_banner, description } = job;
-    console.log(job)
     const jobId = _id
-    console.log(applicants_number)
-    // fetch(`https://job-hunt-nest-server.vercel.app/jobs/${_id}`, {
-    //     method: 'PUT',
-    //     headers: {
-    //         'content-type': 'application/json'
-    //     },
-    //     body: JSON.stringify()
-    // })
-
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -37,7 +27,7 @@ const AllDetails = () => {
         const deadline = new Date(application_deadline).getTime();
 
         if (deadline > today) {
-            fetch('https://job-hunt-server-p8yrw8uv2-pinkus-projects.vercel.app/applicants', {
+            fetch('http://localhost:5000/applicants', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -59,6 +49,13 @@ const AllDetails = () => {
                             });
                     }
                 })
+
+            fetch(`http://localhost:5000/applicants/${jobId}`, {
+                method: 'PUT',
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+
 
         } else {
             new Swal("JobHunt", "Application Deadline is over!");

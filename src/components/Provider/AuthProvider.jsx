@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
             console.log(currentUser)
             if (currentUser) {
                 
-                fetch('https://job-hunt-nest-server.vercel.app/jwt', {
+                fetch('http://localhost:5000/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
                     })
             }
             else{
-                fetch('https://job-hunt-nest-server.vercel.app/logout', {
+                fetch('http://localhost:5000/logout', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

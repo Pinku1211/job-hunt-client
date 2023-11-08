@@ -19,7 +19,7 @@ const AddJob = () => {
         const newJob = {job_banner, name_posted, job_title, job_category, salary_range, description,  job_posting_date, application_deadline, applicants_number}
         console.log(newJob)
 
-        fetch('https://job-hunt-nest-server.vercel.app/jobs', {
+        fetch('http://localhost:5000/jobs', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

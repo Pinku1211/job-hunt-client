@@ -14,13 +14,13 @@ const AppliedJobs = () => {
     
 
     useEffect(() => {
-        fetch('https://job-hunt-nest-server.vercel.app/jobs')
+        fetch('http://localhost:5000/jobs')
             .then(res => res.json())
             .then(data => setJobs(data))
     }, [])
 
     useEffect(() => {
-        fetch(`https://job-hunt-nest-server.vercel.app/applicants?email=${user.email}`,
+        fetch(`http://localhost:5000/applicants?email=${user.email}`,
             { credentials: 'include' }
         )
             .then(res => res.json())
@@ -54,9 +54,7 @@ const AppliedJobs = () => {
             })
             
         }
-
     }
-
     return (
         <div className='min-h[100vh]'>
             <Helmet>

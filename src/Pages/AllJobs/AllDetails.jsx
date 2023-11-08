@@ -12,7 +12,7 @@ const AllDetails = () => {
     const navigate = useNavigate();
     const job = useLoaderData();
     const { job_category, _id, job_title, name_posted, salary_range, job_posting_date, applicants_number, application_deadline, job_banner, description } = job;
-
+    console.log(job)
     const jobId = _id
     console.log(applicants_number)
     // fetch(`http://localhost:5000/jobs/${_id}`, {

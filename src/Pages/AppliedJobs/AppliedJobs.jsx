@@ -1,19 +1,17 @@
 import React from 'react';
 import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useLoaderData, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../components/Provider/AuthProvider';
 import AppliedTable from './AppliedTable';
-import { FaSistrix } from 'react-icons/fa';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 
 const AppliedJobs = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [jobs, setJobs] = useState([]);
     const [applicants, setApplicants] = useState([]);
-    const [selectedJobs, setSelectedJobs] = useState([]);
+    
 
     useEffect(() => {
         fetch('http://localhost:5000/jobs')
@@ -23,38 +21,38 @@ const AppliedJobs = () => {
 
     useEffect(() => {
         fetch(`http://localhost:5000/applicants?email=${user.email}`,
-        {credentials: 'include'}
+            { credentials: 'include' }
         )
-        .then(res => res.json())
-        .then(data => setApplicants(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setApplicants(data))
+    }, [])
+
+    const [selectedJobs, setSelectedJobs] = useState([]);
+    useEffect(() => {
+        const appliedJobs = jobs?.filter(job1 => applicants.some(job2 => job2.jobId === job1._id));
+        console.log(appliedJobs)
+        setSelectedJobs(appliedJobs);
+    }, [jobs, applicants])
 
 
-    const appliedJobs = [];
-    for (let i = 0; i < applicants.length; i++) {
-        for (let j = 0; j < jobs.length; j++) {
-            if (jobs[j]._id == applicants[i].jobId) {
-                appliedJobs.push(jobs[j])
-            }
-        }
-
-    }
-
+    
+    console.log(selectedJobs)
 
     const handleSearch = e => {
         e.preventDefault();
-        console.log(e.target.value)
+        console.log(e.target.value);
         const selectedCategory = e.target.value;
-        const searchedJobs = appliedJobs.filter(job => job.job_category === selectedCategory);
-        console.log(searchedJobs)
+        const searchedJobs = selectedJobs?.filter(job => job.job_category == selectedCategory);
         setSelectedJobs(searchedJobs)
-        if(searchedJobs.length === 0) {
+        console.log(searchedJobs)
+        if (searchedJobs.length === 0) {
             Swal.fire({
                 title: 'error!',
-            text: 'There is no match',
-            icon: 'error',
-            confirmButtonText: 'Cool'
+                text: 'There is no match',
+                icon: 'error',
+                confirmButtonText: 'Cool'
             })
+            
         }
 
     }
@@ -75,7 +73,7 @@ const AppliedJobs = () => {
                 </select>
             </div>
             <p className='my-8 text-[#5b0888] text-4xl text-center font-bold'>The Jobs You Applied</p>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto my-10">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -90,9 +88,7 @@ const AppliedJobs = () => {
                     </thead>
 
                     {
-                        selectedJobs.length === 0 ?
-                            appliedJobs?.map(job => <AppliedTable key={job._id} job={job}></AppliedTable>)
-                         : selectedJobs?.map(job => <AppliedTable key={job._id} job={job}></AppliedTable>)
+                        selectedJobs?.map(job => <AppliedTable key={job._id} job={job}></AppliedTable>)
                     }
                 </table>
             </div>

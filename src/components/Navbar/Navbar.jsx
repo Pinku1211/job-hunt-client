@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { FaAlignJustify } from "react-icons/fa";
+import logo from '../../../public/icon.png'
 
 const Navbar = () => {
     const location = useLocation();
@@ -46,7 +47,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <img className='w-[30px] md:w-12' src='../../../public/icon.png' alt="logo" />
+                        <img className='w-[30px] md:w-12' src={logo} alt="logo" />
                         <h1 className='text-2xl md:text-4xl font-bold text-[#5B0888]'>JobHunt</h1>
                     </div>
                 </div>

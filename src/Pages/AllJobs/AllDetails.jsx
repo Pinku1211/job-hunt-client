@@ -15,7 +15,7 @@ const AllDetails = () => {
     console.log(job)
     const jobId = _id
     console.log(applicants_number)
-    // fetch(`http://localhost:5000/jobs/${_id}`, {
+    // fetch(`https://job-hunt-nest-server.vercel.app/jobs/${_id}`, {
     //     method: 'PUT',
     //     headers: {
     //         'content-type': 'application/json'
@@ -37,7 +37,7 @@ const AllDetails = () => {
         const deadline = new Date(application_deadline).getTime();
 
         if (deadline > today) {
-            fetch('http://localhost:5000/applicants', {
+            fetch('https://job-hunt-server-p8yrw8uv2-pinkus-projects.vercel.app/applicants', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

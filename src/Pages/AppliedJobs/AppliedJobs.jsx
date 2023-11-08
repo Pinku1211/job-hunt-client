@@ -14,13 +14,13 @@ const AppliedJobs = () => {
     
 
     useEffect(() => {
-        fetch('http://localhost:5000/jobs')
+        fetch('https://job-hunt-nest-server.vercel.app/jobs')
             .then(res => res.json())
             .then(data => setJobs(data))
     }, [])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/applicants?email=${user.email}`,
+        fetch(`https://job-hunt-nest-server.vercel.app/applicants?email=${user.email}`,
             { credentials: 'include' }
         )
             .then(res => res.json())
@@ -90,6 +90,17 @@ const AppliedJobs = () => {
                     {
                         selectedJobs?.map(job => <AppliedTable key={job._id} job={job}></AppliedTable>)
                     }
+                    {/* foot */}
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Job</th>
+                            <th>Posting Date</th>
+                            <th>Deadline</th>
+                            <th>Category</th>
+                            <th>Salary range</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

@@ -23,7 +23,7 @@ const Update = () => {
         const updatedJob = {job_banner, name_posted, job_title, job_category, salary_range, description,  job_posting_date, application_deadline, applicants_number}
         console.log(updatedJob);
 
-        fetch(`http://localhost:5000/jobs/${_id}`,{
+        fetch(`https://job-hunt-nest-server.vercel.app/jobs/${_id}`,{
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

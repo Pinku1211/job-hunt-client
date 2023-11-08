@@ -70,7 +70,7 @@ const MyJobs = () => {
                         </tr>
                     </thead>
                     {
-                        myJobs.length === 0 ? <div className='w-full'><h1 className='text-center text-red-400 text-xl font-bold my-3'>There is no job you added</h1></div> : myJobs?.map(job => <MyJob key={job._id} job={job} handleDelete={handleDelete}></MyJob>)
+                        myJobs.length === 0 ? <div><h1 className='text-center text-red-400 text-xs md:text-xl font-bold my-3'>There is no job you added</h1></div> : myJobs?.map(job => <MyJob key={job._id} job={job} handleDelete={handleDelete}></MyJob>)
 
 
                     }

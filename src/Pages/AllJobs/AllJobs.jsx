@@ -3,20 +3,29 @@ import { Helmet } from 'react-helmet-async';
 import { useLoaderData } from 'react-router-dom';
 import JobRow from './JobRow';
 import { FaSistrix } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const AllJobs = () => {
 
     const jobs = useLoaderData();
     const [defaultJobs, setDefaultJob] = useState(jobs);
-
     const handleSearch = e =>{
         e.preventDefault();
-        const form = new FormData(e.currentTarget);
-        const jobTitle = form.get('job').toLowerCase();
+        let form = new FormData(e.currentTarget);
+        const selectedCategory = form.get('job').toLowerCase();
+        const searchedJobs = jobs?.filter(defaultJob => defaultJob.job_title.toLowerCase() === selectedCategory);
+        if(searchedJobs === 0){
+            Swal.fire({
+                title: 'error!',
+                text: 'There is no match',
+                icon: 'error',
+                confirmButtonText: 'Cool'
+            })
+            setDefaultJob(jobs)
+        }else{
+            setDefaultJob(searchedJobs)
+        }
         
-        const searchedJobs = defaultJobs?.filter(defaultJob => defaultJob.job_title.toLowerCase() == jobTitle);
-        setDefaultJob(searchedJobs)
-        console.log(searchedJobs)
         
     }
 

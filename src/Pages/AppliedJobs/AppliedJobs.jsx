@@ -28,10 +28,12 @@ const AppliedJobs = () => {
     }, [])
 
     const [selectedJobs, setSelectedJobs] = useState([]);
+    const [defaultJob, setDefaultJob] = useState([])
     useEffect(() => {
         const appliedJobs = jobs?.filter(job1 => applicants.some(job2 => job2.jobId === job1._id));
         console.log(appliedJobs)
         setSelectedJobs(appliedJobs);
+        setDefaultJob(appliedJobs)
     }, [jobs, applicants])
 
 
@@ -42,8 +44,8 @@ const AppliedJobs = () => {
         e.preventDefault();
         console.log(e.target.value);
         const selectedCategory = e.target.value;
-        const searchedJobs = selectedJobs?.filter(job => job.job_category == selectedCategory);
-        setSelectedJobs(searchedJobs)
+        const searchedJobs = defaultJob?.filter(job => job.job_category == selectedCategory);
+          
         console.log(searchedJobs)
         if (searchedJobs.length === 0) {
             Swal.fire({
@@ -52,8 +54,11 @@ const AppliedJobs = () => {
                 icon: 'error',
                 confirmButtonText: 'Cool'
             })
+            setSelectedJobs(defaultJob)
             
         }
+        setSelectedJobs(searchedJobs)
+        
     }
     return (
         <div className='min-h[100vh]'>

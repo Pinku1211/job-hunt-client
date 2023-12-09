@@ -1,6 +1,7 @@
 <h1 align='center'><img width='40' src="./public/icon.png" alt="1211" />JobHunt</h1>
 
-# site-link: https://job-hunt-f101c.web.app
+site-link: https://job-hunt-f101c.web.app
+<p>server-side-repo: https://github.com/Pinku1211/job-hunt-server</p>
 
 ## Features:
 

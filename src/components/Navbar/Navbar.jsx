@@ -28,11 +28,17 @@ const Navbar = () => {
     </>
 
     const navLinks = <><NavLink className={location.pathname === '/' && 'text-white font-semibold bg-[#5B0888] px-2 py-1 rounded-md'} to="/">Home</NavLink>
-    <NavLink className={location.pathname === '/allJobs' && 'text-white font-semibold bg-[#5B0888] px-2 py-1 rounded-md'} to="/allJobs">All Jobs</NavLink>
-    <NavLink className={location.pathname === '/appliedJobs' && 'text-white font-semibold bg-[#5B0888] px-2 py-1 rounded-md'} to="/appliedJobs">Applied Jobs</NavLink>
-    <NavLink className={location.pathname === '/addJob' && 'text-white font-semibold bg-[#5B0888] px-2 py-1 rounded-md'} to="/addJob">Add A Job</NavLink>
-    <NavLink className={location.pathname === '/myJobs' && 'text-white font-semibold bg-[#5B0888] px-2 py-1 rounded-md'} to="/myJobs">My Jobs</NavLink>
-    <NavLink className={location.pathname === '/blogs' && 'text-white font-semibold bg-[#5B0888] px-2 py-1 rounded-md'} to="/blogs">Blogs</NavLink></>
+        <NavLink className={location.pathname === '/allJobs' && 'text-white font-semibold bg-[#5B0888] px-2 py-1 rounded-md'} to="/allJobs">All Jobs</NavLink>
+        <NavLink className={location.pathname === '/blogs' && 'text-white font-semibold bg-[#5B0888] px-2 py-1 rounded-md'} to="/blogs">Blogs</NavLink>
+        {
+            user && <>
+                <NavLink className={location.pathname === '/appliedJobs' && 'text-white font-semibold bg-[#5B0888] px-2 py-1 rounded-md'} to="/appliedJobs">Applied Jobs</NavLink>
+                <NavLink className={location.pathname === '/addJob' && 'text-white font-semibold bg-[#5B0888] px-2 py-1 rounded-md'} to="/addJob">Add A Job</NavLink>
+                <NavLink className={location.pathname === '/myJobs' && 'text-white font-semibold bg-[#5B0888] px-2 py-1 rounded-md'} to="/myJobs">My Jobs</NavLink>
+                <NavLink className={location.pathname === '/uploadResume' && 'text-white font-semibold bg-[#5B0888] px-2 py-1 rounded-md'} to="/uploadResume">Upload Resume</NavLink>
+            </> 
+        }
+    </>
 
     return (
         <div className='bg-base-200 py-2'>

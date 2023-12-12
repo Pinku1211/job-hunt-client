@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AppliedTable = ({job}) => {
-    const { job_category, _id, job_title, name_posted, salary_range, job_posting_date, applicants_number, application_deadline } = job;
+    const { job_category, job_title, name_posted, salary_range, job_posting_date, application_deadline } = job;
     return (
         <>
             <tbody>

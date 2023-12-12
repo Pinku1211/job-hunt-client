@@ -12,10 +12,9 @@ const MyJobs = () => {
     const { user } = useContext(AuthContext)
     const loadedJobs = useLoaderData();
     const [jobs, setJobs] = useState(loadedJobs);
-    console.log(jobs)
-    console.log(user.displayName)
 
-    const myJobs = jobs?.filter(job => job.name_posted === `${user.displayName}`)
+    const myJobs = jobs?.filter(job => job.name_posted == `${user.displayName}`)
+
 
     const handleDelete = id => {
         Swal.fire({
@@ -30,7 +29,7 @@ const MyJobs = () => {
             if (result.isConfirmed) {
                 console.log(id)
 
-                fetch(`https://job-hunt-final-server.vercel.app/jobs/${id}`, {
+                fetch(`http://localhost:5000/jobs/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())
@@ -57,7 +56,9 @@ const MyJobs = () => {
             <Helmet>
                 <title>JobHunt | My Jobs</title>
             </Helmet>
-            <div className="overflow-x-auto">
+            {
+                myJobs.length === 0 ? <h1 className='text-red-400 text-xl min-h-[60vh] flex items-center justify-center'>Nothing here</h1>
+                : <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -72,11 +73,12 @@ const MyJobs = () => {
                     {
                         myJobs.length === 0 ? <div><h1 className='text-center text-red-400 text-xs md:text-xl font-bold my-3'>There is no job you added</h1></div> : myJobs?.map(job => <MyJob key={job._id} job={job} handleDelete={handleDelete}></MyJob>)
 
-
                     }
 
                 </table>
             </div>
+            }
+            
         </div>
     );
 };

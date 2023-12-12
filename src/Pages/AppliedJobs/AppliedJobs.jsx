@@ -6,22 +6,16 @@ import AppliedTable from './AppliedTable';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
+import useJobs from '../../hooks/useJobs';
 
 const AppliedJobs = () => {
     const { user } = useContext(AuthContext)
-    const [jobs, setJobs] = useState([]);
     const [applicants, setApplicants] = useState([]);
-    
+    const [jobs] = useJobs();
 
     useEffect(() => {
-        fetch('https://job-hunt-final-server.vercel.app/jobs')
-            .then(res => res.json())
-            .then(data => setJobs(data))
-    }, [])
-
-    useEffect(() => {
-        fetch(`https://job-hunt-final-server.vercel.app/applicants?email=${user.email}`,
-            { credentials: 'include' }
+        fetch(`http://localhost:5000/applicants?email=${user.email}`,
+            // { credentials: 'include' }
         )
             .then(res => res.json())
             .then(data => setApplicants(data))
@@ -31,22 +25,15 @@ const AppliedJobs = () => {
     const [defaultJob, setDefaultJob] = useState([])
     useEffect(() => {
         const appliedJobs = jobs?.filter(job1 => applicants.some(job2 => job2.jobId === job1._id));
-        console.log(appliedJobs)
         setSelectedJobs(appliedJobs);
         setDefaultJob(appliedJobs)
     }, [jobs, applicants])
 
-
-    
-    console.log(selectedJobs)
-
     const handleSearch = e => {
         e.preventDefault();
-        console.log(e.target.value);
         const selectedCategory = e.target.value;
         const searchedJobs = defaultJob?.filter(job => job.job_category == selectedCategory);
-          
-        console.log(searchedJobs)
+
         if (searchedJobs.length === 0) {
             Swal.fire({
                 title: 'error!',
@@ -76,7 +63,9 @@ const AppliedJobs = () => {
                 </select>
             </div>
             <p className='my-8 text-[#5b0888] text-4xl text-center font-bold'>The Jobs You Applied</p>
-            <div className="overflow-x-auto my-10">
+            {
+                defaultJob?.length === 0 ? <h1 className='text-red-400 text-xl min-h-[60vh] flex items-center justify-center'>there is no applied job</h1> 
+                : <div className="overflow-x-auto my-10">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -106,6 +95,7 @@ const AppliedJobs = () => {
                     </tfoot>
                 </table>
             </div>
+            }
         </div>
     );
 };

@@ -5,6 +5,7 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { updateProfile } from 'firebase/auth';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../components/Provider/AuthProvider';
+import { saveUser } from '../hooks/auth';
 
 const SignUp = () => {
     const { createUser, logInWithGoogle } = useContext(AuthContext);
@@ -24,21 +25,22 @@ const SignUp = () => {
         const checkBox = e.target.checkBox.checked;
         setSignUpError('');
 
-        if(password.length < 6) {
+        if (password.length < 6) {
             setSignUpError('Password should be at least six character')
             return;
         }
-        if(!/(?=.*[A-Z])(?=.*[!@#$%^&+=])/.test(password)){
+        if (!/(?=.*[A-Z])(?=.*[!@#$%^&+=])/.test(password)) {
             setSignUpError('Password is missing an uppercase letter or special character')
             return;
         }
-        if(!checkBox) {
+        if (!checkBox) {
             setSignUpError('Please accept our terms and conditions to proceed')
             return;
         }
 
         createUser(email, password)
-            .then(result => {
+            .then(async result => {
+                const loggedUser = result.user
                 console.log(result.user)
                 updateProfile(result.user, {
                     displayName: name,
@@ -46,7 +48,8 @@ const SignUp = () => {
                 })
                 new Swal("JobHunt", "Account created successfully!");
                 navigate(location?.state ? location.state : "/")
-                
+                const savedUser = await saveUser(loggedUser)
+                console.log(savedUser)
             })
             .catch(error => {
                 console.log(error)
@@ -56,8 +59,10 @@ const SignUp = () => {
 
     const handleGoogleSignIng = () => {
         logInWithGoogle()
-            .then(result => {
+            .then(async result => {
                 console.log(result.user)
+                const savedUser = await saveUser(result?.user)
+                console.log(savedUser)
                 new Swal("JobHunt", "Logged in successfully!");
                 navigate(location?.state ? location.state : "/")
             })
@@ -92,33 +97,33 @@ const SignUp = () => {
                     <form onSubmit={handleSignUp}>
                         <div className="mb-4">
                             <label for="hs-hero-name-2" className="block text-sm font-medium "><span className="sr-only">Full name</span></label>
-                            <input type="text" name='name' id="hs-hero-name-2" className="py-3 px-4 block w-full rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 sm:p-4 border border-[#5b0888]" placeholder="Full name" required/>
+                            <input type="text" name='name' id="hs-hero-name-2" className="py-3 px-4 block w-full rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 sm:p-4 border border-[#5b0888]" placeholder="Full name" required />
                         </div>
 
                         <div className="mb-4">
                             <label for="hs-hero-email-2" className="block text-sm font-medium "><span className="sr-only">Email address</span></label>
-                            <input type="email" name='email' id="hs-hero-email-2" className="py-3 px-4 block w-full rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 sm:p-4 border border-[#5b0888]" placeholder="Email address" required/>
+                            <input type="email" name='email' id="hs-hero-email-2" className="py-3 px-4 block w-full rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 sm:p-4 border border-[#5b0888]" placeholder="Email address" required />
                         </div>
 
                         <div className="mb-4 relative">
                             <label for="hs-hero-password-2" className="block text-sm font-medium "><span className="sr-only">Password</span></label>
-                            <input type={showPassword ? "text" : "password"} name='password' id="hs-hero-password-2" className="py-3 px-4 block w-full rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 sm:p-4 border border-[#5b0888]" placeholder="Password" required/>
-                            <span onClick={()=> setShowPassword(!showPassword)} className='absolute right-3 bottom-4'>{showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}</span>
+                            <input type={showPassword ? "text" : "password"} name='password' id="hs-hero-password-2" className="py-3 px-4 block w-full rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 sm:p-4 border border-[#5b0888]" placeholder="Password" required />
+                            <span onClick={() => setShowPassword(!showPassword)} className='absolute right-3 bottom-4'>{showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}</span>
                         </div>
                         <div className="mb-4">
                             <label for="hs-hero-password-2" className="block text-sm font-medium "><span className="sr-only">PhotoUrl</span></label>
-                            <input type="text" name='photo' id="hs-hero-password-2" className="py-3 px-4 block w-full rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 sm:p-4 border border-[#5b0888]" placeholder="PhotoUrl" required/>
+                            <input type="text" name='photo' id="hs-hero-password-2" className="py-3 px-4 block w-full rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 sm:p-4 border border-[#5b0888]" placeholder="PhotoUrl" required />
                         </div>
                         <div className="mb-2">
                             <label className="flex items-center">
                                 <input type="checkbox" name='checkBox' className="form-checkbox" />
                                 <span className="block ml-2 text-md font-medium text-gray-700 cursor-pointer">Agree to Privacy Policy</span>
-                            </label>      
+                            </label>
                         </div>
 
                         {
-                            signUpError && <p className='text-red-500 text-xs mb-2'>{signUpError}</p> 
-  
+                            signUpError && <p className='text-red-500 text-xs mb-2'>{signUpError}</p>
+
                         }
 
                         <div className="grid">

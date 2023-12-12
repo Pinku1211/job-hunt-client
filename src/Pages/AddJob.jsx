@@ -1,8 +1,22 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../components/Provider/AuthProvider';
+import { useState } from 'react';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import axios from 'axios';
+import useUsers from '../hooks/useUsers';
 
 const AddJob = () => {
+
+    const {user} = useContext(AuthContext)
+    const axiosSecure = useAxiosSecure();
+    const [users] = useUsers();
+    console.log(users)
+    const usersEmail = users?.map(user => user.email)
+    console.log(usersEmail)
+
 
     const handleAddJob = e => {
         e.preventDefault();
@@ -15,31 +29,25 @@ const AddJob = () => {
         const description = form.description.value
         const job_posting_date = form.posting.value
         const application_deadline = form.deadline.value
-        const applicants_number = form.applicantsNum.value
+        const applicants_number_string = form.applicantsNum.value
+        const applicants_number = parseInt(applicants_number_string)
         const newJob = {job_banner, name_posted, job_title, job_category, salary_range, description,  job_posting_date, application_deadline, applicants_number}
         console.log(newJob)
 
-        fetch('https://job-hunt-final-server.vercel.app/jobs', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newJob)
-        })
-        .then(res => res.json())
-        .then(data=>{ 
-            console.log(data)
-            if(data.insertedId){
+        axiosSecure.post('/jobs', [newJob, usersEmail])
+        .then(res => {
+            console.log(res.data)
+            if(res.data.insertedId){
                 Swal.fire({
-                    title: 'Success!',
+                    title: 'success!',
                     text: 'Job added successfully',
                     icon: 'success',
                     confirmButtonText: 'Cool'
-                  })
+                })
             }
         })
-    }
 
+    }
 
     return (
         <div>
@@ -61,7 +69,7 @@ const AddJob = () => {
                         </div>
                         <div>
                             <label className="">Your Name</label>
-                            <input name="name" type="text" placeholder='Name' required className="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                            <input name="name" type="text" value={`${user.displayName}`} placeholder='Name' required className="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
                         </div>
                         <div>
                             <label className="">Job Category</label>
@@ -85,7 +93,7 @@ const AddJob = () => {
                         </div>
                         <div>
                             <label className="">Applicants Number</label>
-                            <input name="applicantsNum" type="text" value={0} placeholder='No of Applicants' className="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                            <input name="applicantsNum" type="text" defaultValue={0} placeholder='No of Applicants' className="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
                         </div>
                         
                     </div>

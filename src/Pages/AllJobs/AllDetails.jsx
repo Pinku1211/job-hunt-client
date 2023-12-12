@@ -5,12 +5,15 @@ import { AuthContext } from '../../components/Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import emailjs from '@emailjs/browser';
 import { useRef } from 'react';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const AllDetails = () => {
     const formRef = useRef()
     const { user } = useContext(AuthContext)
     const navigate = useNavigate();
     const job = useLoaderData();
+    const axiosSecure = useAxiosSecure();
+
     const { job_category, _id, job_title, name_posted, salary_range, job_posting_date, applicants_number, application_deadline, job_banner, description } = job;
     const jobId = _id
 
@@ -27,19 +30,11 @@ const AllDetails = () => {
         const deadline = new Date(application_deadline).getTime();
 
         if (deadline > today) {
-            fetch('https://job-hunt-final-server.vercel.app/applicants', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(applicant)
-            })
-                .then(res => res.json())
-                .then(data => {
-
-                    console.log(data.insertedId)
-                    if (data.insertedId) {
-                        new Swal("JobHunt", "Application Submitted successfully!");
+            axiosSecure.post('/applicants', applicant)
+            .then(res => {
+                console.log(res.data)
+                if(res.data.insertedId){
+                    new Swal("JobHunt", "Application Submitted successfully!");
                         navigate(location?.state ? location.state : "/allJobs")
                         emailjs.sendForm('service_jrlazz4', 'template_xgjnozk', formRef.current, '9p1CIaofBsrpwmiZi')
                             .then((result) => {
@@ -47,10 +42,10 @@ const AllDetails = () => {
                             }, (error) => {
                                 console.log(error.text);
                             });
-                    }
-                })
+                }
+            })
 
-            fetch(`https://job-hunt-final-server.vercel.app/applicants/${jobId}`, {
+            fetch(`http://localhost:5000/applicants/${jobId}`, {
                 method: 'PUT',
             })
             .then(res => res.json())

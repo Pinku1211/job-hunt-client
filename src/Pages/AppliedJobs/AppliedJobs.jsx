@@ -14,7 +14,7 @@ const AppliedJobs = () => {
     const [jobs] = useJobs();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/applicants?email=${user.email}`,
+        fetch(`https://job-hunt-final-server.vercel.app/applicants?email=${user.email}`,
             // { credentials: 'include' }
         )
             .then(res => res.json())

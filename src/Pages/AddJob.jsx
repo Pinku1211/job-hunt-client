@@ -3,9 +3,7 @@ import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../components/Provider/AuthProvider';
-import { useState } from 'react';
 import useAxiosSecure from '../hooks/useAxiosSecure';
-import axios from 'axios';
 import useUsers from '../hooks/useUsers';
 
 const AddJob = () => {
@@ -46,7 +44,6 @@ const AddJob = () => {
                 })
             }
         })
-
     }
 
     return (

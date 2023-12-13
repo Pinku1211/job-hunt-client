@@ -29,7 +29,7 @@ const MyJobs = () => {
             if (result.isConfirmed) {
                 console.log(id)
 
-                fetch(`http://localhost:5000/jobs/${id}`, {
+                fetch(`https://job-hunt-final-server.vercel.app/jobs/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())

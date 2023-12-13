@@ -45,7 +45,7 @@ const AllDetails = () => {
                 }
             })
 
-            fetch(`http://localhost:5000/applicants/${jobId}`, {
+            fetch(`https://job-hunt-final-server.vercel.app/applicants/${jobId}`, {
                 method: 'PUT',
             })
             .then(res => res.json())

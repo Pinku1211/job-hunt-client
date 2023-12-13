@@ -39,35 +39,7 @@ const AuthProvider = ({ children }) => {
             const loggedUser = { email: userEmail };
             setUser(currentUser)
             setLoading(false)
-            // if (currentUser) {
-                
-            //     fetch('http://localhost:5000/jwt', {
-            //         method: 'POST',
-            //         headers: {
-            //             'content-type': 'application/json'
-            //         },
-            //         body: JSON.stringify(loggedUser),
-            //         credentials: 'include'
-            //     })
-            //         .then(res => res.json())
-            //         .then(data => {
-            //             console.log("token response",data)
-            //         })
-            // }
-            // else{
-            //     fetch('http://localhost:5000/logout', {
-            //         method: 'POST',
-            //         headers: {
-            //             'content-type': 'application/json'
-            //         },
-            //         body: JSON.stringify(loggedUser),
-            //         credentials: 'include'
-            //     })
-            //         .then(res => res.json())
-            //         .then(data => {
-            //             console.log(data)
-            //         })
-            // }
+           
         })
         return () => {
             unsubscribe();

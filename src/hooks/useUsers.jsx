@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 
 const useUsers = () => {
     const [users, setUsers] = useState([]);
-    // http://localhost:5000
+    // https://job-hunt-final-server.vercel.app
     
     useEffect(() => {
-        fetch('http://localhost:5000/users')
+        fetch('https://job-hunt-final-server.vercel.app/users')
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [])

@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../components/Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import { saveUser } from '../hooks/auth';
 
 const Login = () => {
     const { login, logInWithGoogle } = useContext(AuthContext)
@@ -35,11 +36,12 @@ const Login = () => {
 
     const handleGoogleSignIng = () => {
         logInWithGoogle()
-            .then(result => {
+            .then(async result => {
                 console.log(result.user)
+                const savedUser = await saveUser(result?.user)
+                console.log(savedUser)
                 new Swal("JobHunt", "Logged in successfully!");
-                navigate(location?.state ? location.state : "/")
-
+                navigate("/")
             })
             .catch(error => {
                 console.log(error)
